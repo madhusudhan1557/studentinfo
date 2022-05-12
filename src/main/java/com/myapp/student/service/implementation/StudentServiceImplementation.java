@@ -8,7 +8,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myapp.student.entity.Faculty;
 import com.myapp.student.entity.Student;
+import com.myapp.student.repository.FacultyRepository;
 import com.myapp.student.repository.StudentRepository;
 import com.myapp.student.request.CreateStudentRequest;
 import com.myapp.student.request.StudentInQueryRequest;
@@ -20,6 +22,9 @@ public class StudentServiceImplementation implements StudentService {
 
 	@Autowired
 	private StudentRepository studentRepo;
+	
+	@Autowired
+	private FacultyRepository facultyRepo;
 
 	@Override
 	public List<Student> getAllStudents() {
@@ -29,6 +34,10 @@ public class StudentServiceImplementation implements StudentService {
 	@Override
 	public Student createStudent(CreateStudentRequest studentRequest) {
 		Student student = new Student(studentRequest);
+		Faculty faculty = new Faculty();
+		faculty.setTitle(studentRequest.getTitle());
+		faculty = facultyRepo.save(faculty);
+		student.setFaculty(faculty);
 		return student = studentRepo.save(student);
 	}
 

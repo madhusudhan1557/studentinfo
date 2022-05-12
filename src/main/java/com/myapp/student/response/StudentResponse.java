@@ -15,6 +15,7 @@ public class StudentResponse {
 	private String email;
 	private String address;
 	private Long contact;
+	private String title;
 	
 	public StudentResponse(Student student) {
 		this.id = student.getId();
@@ -23,5 +24,6 @@ public class StudentResponse {
 		this.email = student.getEmail();
 		this.address = student.getAddress();
 		this.contact = student.getContact();
+		this.title = student.getFaculty().getTitle();
 	}
 }
