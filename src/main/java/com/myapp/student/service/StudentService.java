@@ -22,6 +22,8 @@ public interface StudentService {
 
 	List<Student> getStudentByFirstname(String firstname);
 
-	List<Student> getStudentByFirstnameAndLaststname(String firstname, String lastname);
+	List<Student> getStudentByFirstnameAndLastname(String firstname, String lastname);
+
+	List<Student> getStudentByFirstnameOrLastname(String firstname, String lastname);
 
 }

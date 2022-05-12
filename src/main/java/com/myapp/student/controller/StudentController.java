@@ -49,15 +49,27 @@ public class StudentController {
 		return studentResponse;
 	}
     
-	@GetMapping("/getByLastnameAndFirstname/{firstname}/{lastname}")
+	@GetMapping("/getByFirstnameAndLastname/{firstname}/{lastname}")
 	public List<StudentResponse>
 	getStudentByLastnameAndFirstname(@PathVariable("firstname") String firstname, @PathVariable("lastname") String lastname) {
-	 List<Student> studentList = studentService.getStudentByFirstnameAndLaststname(firstname, lastname);
+	 List<Student> studentList = studentService.getStudentByFirstnameAndLastname(firstname, lastname);
 	 List<StudentResponse> studentResponse = new ArrayList<StudentResponse>();
 	 studentList.stream().forEach(student -> {
 		 studentResponse.add(new StudentResponse(student));
 	 });
 	 return studentResponse;
+	}
+	
+	@GetMapping("/getByFirstnameOrLastname/{firstname}/{lastname}")
+	public List<StudentResponse> getStudentByFirstnameOrLastname(@PathVariable("firstname") String firstname,
+			@PathVariable("lastname") String lastname) {
+		List<Student> studentList = studentService.getStudentByFirstnameOrLastname(firstname, lastname);
+		List<StudentResponse> studentResponse = new ArrayList<StudentResponse>();
+		
+		studentList.stream().forEach(student -> {
+			studentResponse.add(new StudentResponse(student));
+		});
+		return studentResponse;
 	}
 
 	@PostMapping("/create")

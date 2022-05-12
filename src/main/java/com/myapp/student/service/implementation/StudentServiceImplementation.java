@@ -70,9 +70,14 @@ public class StudentServiceImplementation implements StudentService {
 	}
 
 	@Override
-	public List<Student> getStudentByFirstnameAndLaststname(String firstname, String lastname) {
+	public List<Student> getStudentByFirstnameAndLastname(String firstname, String lastname) {
 		
 		return studentRepo.getByFirstnameAndLastname(firstname, lastname);
+	}
+
+	@Override
+	public List<Student> getStudentByFirstnameOrLastname(String firstname, String lastname) {
+		return studentRepo.getByFirstnameOrLastname(firstname, lastname);
 	}
 
 	
