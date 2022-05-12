@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.myapp.student.entity.Student;
 import com.myapp.student.repository.StudentRepository;
 import com.myapp.student.request.CreateStudentRequest;
+import com.myapp.student.request.StudentInQueryRequest;
 import com.myapp.student.request.UpdateStudentRequest;
 import com.myapp.student.service.StudentService;
 
@@ -66,18 +67,24 @@ public class StudentServiceImplementation implements StudentService {
 
 	@Override
 	public List<Student> getStudentByFirstname(String firstname) {
-		return studentRepo.getByFirstname(firstname);
+		return studentRepo.findByFirstname(firstname);
 	}
 
 	@Override
 	public List<Student> getStudentByFirstnameAndLastname(String firstname, String lastname) {
 		
-		return studentRepo.getByFirstnameAndLastname(firstname, lastname);
+		return studentRepo.findByFirstnameAndLastname(firstname, lastname);
 	}
 
 	@Override
 	public List<Student> getStudentByFirstnameOrLastname(String firstname, String lastname) {
-		return studentRepo.getByFirstnameOrLastname(firstname, lastname);
+		return studentRepo.findByFirstnameOrLastname(firstname, lastname);
+	}
+
+	@Override
+	public List<Student> getByFirstnameIn(StudentInQueryRequest inRequest) {
+		System.out.println(inRequest.getFirstnames());
+		return studentRepo.findByFirstnameIn(inRequest.getFirstnames());
 	}
 
 	

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myapp.student.entity.Student;
 import com.myapp.student.request.CreateStudentRequest;
+import com.myapp.student.request.StudentInQueryRequest;
 import com.myapp.student.request.UpdateStudentRequest;
 import com.myapp.student.response.StudentResponse;
 import com.myapp.student.service.StudentService;
@@ -59,6 +60,16 @@ public class StudentController {
 	 });
 	 return studentResponse;
 	}
+	
+     @GetMapping("/getByFirstnameIn")
+     public List<StudentResponse> getByFirstnameIn(@RequestBody StudentInQueryRequest inRequest) {
+    	 List<Student> studentList = studentService.getByFirstnameIn(inRequest);
+    	 List<StudentResponse> studentResponse = new ArrayList<StudentResponse>();
+    	 studentList.stream().forEach(student -> {
+    		 studentResponse.add(new StudentResponse(student));
+    	 });
+    	 return studentResponse;
+     }
 	
 	@GetMapping("/getByFirstnameOrLastname/{firstname}/{lastname}")
 	public List<StudentResponse> getStudentByFirstnameOrLastname(@PathVariable("firstname") String firstname,

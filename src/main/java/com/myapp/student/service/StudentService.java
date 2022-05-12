@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.myapp.student.entity.Student;
 import com.myapp.student.request.CreateStudentRequest;
+import com.myapp.student.request.StudentInQueryRequest;
 import com.myapp.student.request.UpdateStudentRequest;
 
 public interface StudentService {
@@ -25,5 +26,7 @@ public interface StudentService {
 	List<Student> getStudentByFirstnameAndLastname(String firstname, String lastname);
 
 	List<Student> getStudentByFirstnameOrLastname(String firstname, String lastname);
+
+	List<Student> getByFirstnameIn(StudentInQueryRequest inRequest);
 
 }

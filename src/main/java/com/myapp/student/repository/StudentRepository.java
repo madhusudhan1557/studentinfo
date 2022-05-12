@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.myapp.student.entity.Student;
 
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-	List<Student> getByFirstname(String firstname);
-	List<Student> getByFirstnameAndLastname(String firstname, String lastname);
-	List<Student> getByFirstnameOrLastname(String firstname, String lastname);
+	List<Student> findByFirstname(String firstname);
+	List<Student> findByFirstnameAndLastname(String firstname, String lastname);
+	List<Student> findByFirstnameOrLastname(String firstname, String lastname);
+	List<Student> findByFirstnameIn(List<String> firstnames);
 }
