@@ -2,11 +2,12 @@ package com.myapp.student.entity;
 
 import javax.persistence.Entity;
 
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -42,8 +43,7 @@ public class Student {
 
 	private Long contact;
 	
-	@OneToOne
-	@JoinColumn(name = "fid")
+	@ManyToOne
 	private Faculty faculty;
 
 	public Student(CreateStudentRequest studentRequest) {
