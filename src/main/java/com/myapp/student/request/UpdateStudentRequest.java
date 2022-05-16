@@ -9,4 +9,5 @@ public class UpdateStudentRequest {
 	private String email;
 	private String address;
 	private Long contact;
+	private String faculty;
 }

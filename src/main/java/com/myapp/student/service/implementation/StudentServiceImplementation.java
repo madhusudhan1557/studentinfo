@@ -1,8 +1,11 @@
 package com.myapp.student.service.implementation;
 
 import java.util.List;
-import java.util.Objects;
 
+import java.util.Objects;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import com.myapp.student.request.UpdateStudentRequest;
 import com.myapp.student.service.StudentService;
 
 @Service
+@Transactional
 public class StudentServiceImplementation implements StudentService {
 
 	@Autowired
@@ -25,6 +29,7 @@ public class StudentServiceImplementation implements StudentService {
 	
 	@Autowired
 	private FacultyRepository facultyRepo;
+	
 
 	@Override
 	public List<Student> getAllStudents() {
@@ -34,11 +39,13 @@ public class StudentServiceImplementation implements StudentService {
 	@Override
 	public Student createStudent(CreateStudentRequest studentRequest) {
 		Student student = new Student(studentRequest);
-		Faculty faculty = new Faculty();
-		faculty.setTitle(studentRequest.getTitle());
-		faculty = facultyRepo.save(faculty);
-		student.setFaculty(faculty);
-		return student = studentRepo.save(student);
+        Faculty faculty = new Faculty();
+        System.out.println(studentRequest.getFaculty());
+        faculty = facultyRepo.findByTitle(studentRequest.getFaculty());
+        System.out.println(faculty);
+        student.setFaculty(faculty);
+        Student createdStudent = studentRepo.save(student);
+	    return createdStudent;
 	}
 
 	@Override
