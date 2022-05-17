@@ -2,8 +2,8 @@ package com.myapp.student.service.implementation;
 
 import java.util.List;
 
+
 import java.util.Objects;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -40,9 +40,7 @@ public class StudentServiceImplementation implements StudentService {
 	public Student createStudent(CreateStudentRequest studentRequest) {
 		Student student = new Student(studentRequest);
         Faculty faculty = new Faculty();
-        System.out.println(studentRequest.getFaculty());
         faculty = facultyRepo.findByTitle(studentRequest.getFaculty());
-        System.out.println(faculty);
         student.setFaculty(faculty);
         Student createdStudent = studentRepo.save(student);
 	    return createdStudent;
